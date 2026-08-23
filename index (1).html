@@ -1,0 +1,2208 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>RBU Gaming Rewards</title>
+
+<style>
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+-webkit-tap-highlight-color:transparent;
+}
+
+body{
+font-family:Arial,Inter,sans-serif;
+background:#080812;
+color:#fff;
+min-height:100vh;
+}
+
+button{
+font:inherit;
+border:0;
+cursor:pointer;
+-webkit-tap-highlight-color:transparent;
+}
+
+button:active{
+transform:scale(.97);
+}
+
+.app{
+max-width:480px;
+margin:auto;
+min-height:100vh;
+padding-bottom:85px;
+background:
+radial-gradient(circle at 80% 0%,#44218c55,transparent 30%),
+radial-gradient(circle at 0% 35%,#123b9c33,transparent 30%),
+#080812;
+}
+
+.header{
+padding:22px 18px 12px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:25px;
+font-weight:900;
+letter-spacing:1px;
+}
+
+.logo span{
+color:#9b6cff;
+}
+
+.icon-btn{
+width:42px;
+height:42px;
+border-radius:14px;
+background:#ffffff0d;
+color:#fff;
+border:1px solid #ffffff12;
+}
+
+.page{
+display:none;
+padding:8px 16px;
+}
+
+.page.active{
+display:block;
+}
+
+.balance{
+margin:10px 0 18px;
+padding:22px;
+border-radius:25px;
+background:linear-gradient(135deg,#6c3cff,#3c20a0);
+box-shadow:0 15px 40px #5525aa44;
+}
+
+.balance-label{
+font-size:12px;
+opacity:.75;
+}
+
+.balance-value{
+font-size:32px;
+font-weight:900;
+margin:7px 0 14px;
+}
+
+.stats{
+display:flex;
+gap:8px;
+}
+
+.stat{
+flex:1;
+background:#ffffff12;
+padding:10px;
+border-radius:13px;
+}
+
+.stat small{
+display:block;
+opacity:.65;
+font-size:10px;
+}
+
+.stat b{
+font-size:13px;
+}
+
+.card{
+background:#ffffff08;
+border:1px solid #ffffff0d;
+border-radius:22px;
+padding:17px;
+margin-bottom:13px;
+box-shadow:0 10px 30px #0003;
+}
+
+.section-title{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin:20px 2px 12px;
+}
+
+.section-title h2{
+font-size:18px;
+}
+
+.section-title span{
+font-size:12px;
+color:#9d7aff;
+cursor:pointer;
+}
+
+.bonus{
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.bonus-icon{
+width:48px;
+height:48px;
+display:grid;
+place-items:center;
+background:#a26bff22;
+border-radius:15px;
+font-size:24px;
+}
+
+.btn{
+background:linear-gradient(135deg,#8754ff,#5d31e8);
+color:#fff;
+padding:12px 18px;
+border-radius:14px;
+font-weight:800;
+box-shadow:0 8px 20px #6638e544;
+}
+
+.btn:disabled{
+opacity:.45;
+cursor:not-allowed;
+}
+
+.full{
+width:100%;
+}
+
+.game-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+.game{
+min-height:170px;
+padding:17px;
+border-radius:22px;
+border:1px solid #ffffff10;
+background:linear-gradient(145deg,#17172a,#0d0d18);
+position:relative;
+overflow:hidden;
+}
+
+.game:after{
+content:"";
+position:absolute;
+width:100px;
+height:100px;
+border-radius:50%;
+background:#7444ff33;
+filter:blur(20px);
+right:-30px;
+top:-30px;
+pointer-events:none;
+}
+
+.game-icon{
+font-size:42px;
+margin-bottom:13px;
+}
+
+.game h3{
+font-size:17px;
+}
+
+.game p{
+font-size:11px;
+color:#999;
+margin:5px 0 14px;
+}
+
+.task{
+display:flex;
+align-items:center;
+gap:13px;
+}
+
+.task-icon{
+width:48px;
+height:48px;
+border-radius:15px;
+display:grid;
+place-items:center;
+background:#202033;
+font-size:22px;
+flex-shrink:0;
+}
+
+.task-info{
+flex:1;
+}
+
+.task-info b{
+font-size:14px;
+}
+
+.task-info small{
+display:block;
+color:#8e6cff;
+margin-top:4px;
+}
+
+.completed{
+background:#162c21;
+color:#4de18b;
+padding:9px 11px;
+border-radius:11px;
+font-size:11px;
+font-weight:bold;
+}
+
+.referral{
+text-align:center;
+background:linear-gradient(145deg,#24153d,#101021);
+}
+
+.ref-code{
+margin:14px 0;
+padding:13px;
+border-radius:13px;
+background:#0005;
+font-weight:800;
+letter-spacing:2px;
+}
+
+.copy{
+background:#ffffff12;
+color:#fff;
+padding:10px 15px;
+border-radius:11px;
+}
+
+.reward{
+display:flex;
+align-items:center;
+gap:14px;
+}
+
+.uc{
+width:60px;
+height:60px;
+display:grid;
+place-items:center;
+border-radius:18px;
+background:linear-gradient(135deg,#1d5fff,#5c38ff);
+font-weight:900;
+font-size:13px;
+flex-shrink:0;
+}
+
+.reward-info{
+flex:1;
+}
+
+.reward-info h3{
+font-size:16px;
+}
+
+.reward-info p{
+font-size:12px;
+color:#9d7aff;
+margin-top:5px;
+}
+
+.nav{
+position:fixed;
+bottom:0;
+left:50%;
+transform:translateX(-50%);
+width:min(480px,100%);
+height:72px;
+display:flex;
+background:#0e0e1bf2;
+backdrop-filter:blur(20px);
+border-top:1px solid #ffffff10;
+z-index:100;
+}
+
+.nav button{
+flex:1;
+background:none;
+color:#777;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:4px;
+font-size:20px;
+}
+
+.nav button span{
+font-size:10px;
+}
+
+.nav button.active{
+color:#9c72ff;
+}
+
+.modal{
+position:fixed;
+inset:0;
+background:#000b;
+display:none;
+align-items:flex-end;
+justify-content:center;
+z-index:200;
+}
+
+.modal.show{
+display:flex;
+}
+
+.modal-box{
+width:min(480px,100%);
+max-height:90vh;
+overflow-y:auto;
+background:#121220;
+border-radius:28px 28px 0 0;
+padding:24px;
+border-top:1px solid #ffffff15;
+}
+
+.modal-box h2{
+margin-bottom:18px;
+}
+
+.input{
+width:100%;
+padding:14px;
+background:#080812;
+color:#fff;
+border:1px solid #ffffff12;
+border-radius:13px;
+outline:none;
+margin:7px 0 13px;
+}
+
+.input::placeholder{
+color:#666;
+}
+
+.close{
+float:right;
+background:#ffffff10;
+color:#fff;
+width:35px;
+height:35px;
+border-radius:10px;
+font-size:22px;
+}
+
+.game-panel{
+text-align:center;
+}
+
+.big-game{
+font-size:80px;
+margin:30px 0;
+}
+
+.wheel-container{
+position:relative;
+width:250px;
+height:250px;
+margin:30px auto;
+}
+
+.wheel-pointer{
+position:absolute;
+top:-10px;
+left:50%;
+transform:translateX(-50%);
+width:0;
+height:0;
+border-left:15px solid transparent;
+border-right:15px solid transparent;
+border-top:20px solid #9b6cff;
+z-index:10;
+}
+
+.wheel{
+width:250px;
+height:250px;
+border-radius:50%;
+border:8px solid #25243c;
+background:conic-gradient(
+from 0deg,
+#6d3eff 0deg 90deg,
+#1d5fff 90deg 180deg,
+#a44cff 180deg 270deg,
+#22223b 270deg 360deg
+);
+display:grid;
+place-items:center;
+font-size:28px;
+font-weight:900;
+transition:transform 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.wheel.spin{
+animation:spinWheel 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes spinWheel{
+from{
+transform:rotate(0deg);
+}
+to{
+transform:rotate(1440deg);
+}
+}
+
+.dice-container{
+width:100px;
+height:100px;
+margin:30px auto;
+perspective:1000px;
+}
+
+.dice{
+width:100%;
+height:100%;
+position:relative;
+transform-style:preserve-3d;
+transition:transform 0.6s;
+}
+
+.dice.roll{
+animation:rollDice 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes rollDice{
+from{
+transform:rotateX(0) rotateY(0) rotateZ(0);
+}
+to{
+transform:rotateX(720deg) rotateY(720deg) rotateZ(720deg);
+}
+}
+
+.dice-face{
+position:absolute;
+width:100%;
+height:100%;
+background:#6d3eff;
+border:2px solid #9b6cff;
+border-radius:10px;
+display:grid;
+place-items:center;
+font-size:40px;
+font-weight:900;
+}
+
+.mines{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:8px;
+max-width:320px;
+margin:20px auto;
+}
+
+.mine{
+aspect-ratio:1;
+background:#1c1c30;
+border:1px solid #ffffff10;
+border-radius:13px;
+display:grid;
+place-items:center;
+font-size:22px;
+cursor:pointer;
+transition:all 0.3s;
+}
+
+.mine:active{
+transform:scale(0.95);
+}
+
+.mine.safe{
+background:#123c2c;
+color:#4de18b;
+}
+
+.mine.bomb{
+background:#4a1720;
+color:#ff5d72;
+}
+
+.mine.revealed{
+pointer-events:none;
+}
+
+.list-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:14px 0;
+border-bottom:1px solid #ffffff0a;
+}
+
+.list-item:last-child{
+border-bottom:none;
+}
+
+.green{
+color:#4de18b;
+}
+
+.red{
+color:#ff5d72;
+}
+
+.muted{
+color:#888;
+}
+
+.profile-head{
+text-align:center;
+padding:15px;
+}
+
+.avatar{
+width:85px;
+height:85px;
+margin:auto;
+border-radius:50%;
+display:grid;
+place-items:center;
+font-size:35px;
+background:linear-gradient(135deg,#7141ff,#1e65ff);
+}
+
+.profile-head h2{
+margin:10px 0 3px;
+}
+
+.order-status{
+padding:6px 9px;
+border-radius:8px;
+background:#362d14;
+color:#ffc857;
+font-size:10px;
+}
+
+.message{
+margin-top:15px;
+padding:12px;
+border-radius:12px;
+background:#ffffff08;
+}
+
+.bet-options{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin:20px 0;
+}
+
+.bet-btn{
+background:#ffffff12;
+padding:12px;
+border-radius:10px;
+border:1px solid #ffffff10;
+cursor:pointer;
+transition:all 0.3s;
+color:#fff;
+font-weight:600;
+}
+
+.bet-btn:active{
+transform:scale(0.95);
+}
+
+.bet-btn.active{
+background:linear-gradient(135deg,#8754ff,#5d31e8);
+border-color:#9b6cff;
+box-shadow:0 0 15px #8754ff55;
+}
+
+.result-text{
+font-size:18px;
+font-weight:900;
+margin:20px 0;
+text-align:center;
+}
+
+.task-link{
+display:inline-block;
+color:#9b6cff;
+text-decoration:none;
+margin:10px 0;
+}
+
+@media(min-width:700px){
+
+.app{
+max-width:900px;
+}
+
+.page{
+padding:15px 30px;
+}
+
+.nav{
+max-width:900px;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+
+<div class="logo">
+RBU<span>GAMING</span>
+</div>
+
+<button class="icon-btn" onclick="showPage('notifications')">
+🔔
+</button>
+
+</header>
+
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+<div class="balance">
+
+<div class="balance-label">
+💠 RBU BALANCE
+</div>
+
+<div class="balance-value" id="balance">
+12,450 RBU
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<small>Today's earned</small>
+<b id="today">0 RBU</b>
+</div>
+
+<div class="stat">
+<small>Total earned</small>
+<b id="earned">12,450</b>
+</div>
+
+<div class="stat">
+<small>Total spent</small>
+<b id="spent">0</b>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card bonus">
+
+<div class="task">
+
+<div class="bonus-icon">
+🎁
+</div>
+
+<div class="task-info">
+
+<b>Daily Bonus</b>
+
+<small>
++100 RBU every day
+</small>
+
+</div>
+
+</div>
+
+<button id="dailyBtn" class="btn" onclick="claimDaily()">
+CLAIM
+</button>
+
+</div>
+
+
+<div class="section-title">
+
+<h2>
+🎮 Play & Earn
+</h2>
+
+<span onclick="showPage('games')">
+View all
+</span>
+
+</div>
+
+
+<div class="game-grid">
+
+
+<div class="game">
+
+<div class="game-icon">
+🎲
+</div>
+
+<h3>
+Dice
+</h3>
+
+<p>
+Roll the dice
+</p>
+
+<button class="btn full" onclick="openGame('dice')">
+PLAY
+</button>
+
+</div>
+
+
+<div class="game">
+
+<div class="game-icon">
+🎡
+</div>
+
+<h3>
+Lucky Wheel
+</h3>
+
+<p>
+Spin to win
+</p>
+
+<button class="btn full" onclick="openGame('wheel')">
+PLAY
+</button>
+
+</div>
+
+
+<div class="game">
+
+<div class="game-icon">
+💣
+</div>
+
+<h3>
+Mines
+</h3>
+
+<p>
+Find safe tiles
+</p>
+
+<button class="btn full" onclick="openGame('mines')">
+PLAY
+</button>
+
+</div>
+
+
+</div>
+
+
+<div class="section-title">
+
+<h2>
+📢 Join & Earn
+</h2>
+
+</div>
+
+<div id="homeTasks"></div>
+
+
+<div class="section-title">
+
+<h2>
+👥 Invite Friends
+</h2>
+
+</div>
+
+
+<div class="card referral">
+
+<div style="font-size:30px">
+👥
+</div>
+
+<h3 style="margin-top:8px">
+Invite friends
+</h3>
+
+<p class="muted" style="margin-top:5px">
+Earn 400 RBU for every successful referral
+</p>
+
+<div class="ref-code">
+RBU-7X4K9
+</div>
+
+<button class="copy" onclick="copyReferral()">
+COPY CODE
+</button>
+
+</div>
+
+</section>
+
+
+<!-- GAMES -->
+
+<section id="games" class="page">
+
+<div class="section-title">
+<h2>🎮 Games</h2>
+</div>
+
+
+<div class="game-grid">
+
+
+<div class="game">
+
+<div class="game-icon">
+🎲
+</div>
+
+<h3>Dice</h3>
+
+<p>
+Choose your bet and roll.
+</p>
+
+<button class="btn full" onclick="openGame('dice')">
+PLAY
+</button>
+
+</div>
+
+
+<div class="game">
+
+<div class="game-icon">
+🎡
+</div>
+
+<h3>Lucky Wheel</h3>
+
+<p>
+Spin the wheel.
+</p>
+
+<button class="btn full" onclick="openGame('wheel')">
+PLAY
+</button>
+
+</div>
+
+
+<div class="game">
+
+<div class="game-icon">
+💣
+</div>
+
+<h3>Mines</h3>
+
+<p>
+Find diamonds and cash out.
+</p>
+
+<button class="btn full" onclick="openGame('mines')">
+PLAY
+</button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- EARN -->
+
+<section id="earn" class="page">
+
+<div class="section-title">
+<h2>💠 Earn RBU</h2>
+</div>
+
+
+<div class="card bonus">
+
+<div class="task">
+
+<div class="bonus-icon">
+🎁
+</div>
+
+<div class="task-info">
+
+<b>Daily Bonus</b>
+
+<small>
++100 RBU
+</small>
+
+</div>
+
+</div>
+
+<button class="btn" onclick="claimDaily()">
+CLAIM
+</button>
+
+</div>
+
+
+<div id="earnTasks"></div>
+
+
+<div class="card referral">
+
+<h2>
+👥 Invite Friends
+</h2>
+
+<p class="muted" style="margin:8px 0">
++400 RBU per successful referral
+</p>
+
+<div class="ref-code">
+RBU-7X4K9
+</div>
+
+<button class="copy" onclick="copyReferral()">
+COPY
+</button>
+
+</div>
+
+</section>
+
+
+<!-- REWARDS -->
+
+<section id="rewards" class="page">
+
+<div class="section-title">
+
+<h2>
+🎁 Redeem UC
+</h2>
+
+</div>
+
+<div id="rewardsList"></div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section id="profile" class="page">
+
+<div class="card profile-head">
+
+<div class="avatar">
+👤
+</div>
+
+<h2>
+@RBUPlayer
+</h2>
+
+<p class="muted">
+Telegram ID: 123456789
+</p>
+
+</div>
+
+
+<div class="stats card">
+
+<div class="stat">
+
+<small>
+Earned
+</small>
+
+<b id="profileEarned">
+12,450
+</b>
+
+</div>
+
+<div class="stat">
+
+<small>
+Spent
+</small>
+
+<b id="profileSpent">
+0
+</b>
+
+</div>
+
+<div class="stat">
+
+<small>
+Games
+</small>
+
+<b id="gamesPlayed">
+0
+</b>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="list-item" onclick="showPage('transactions')">
+
+💰 Transactions
+<span>›</span>
+
+</div>
+
+
+<div class="list-item" onclick="showPage('orders')">
+
+🎁 Orders
+<span>›</span>
+
+</div>
+
+
+<div class="list-item" onclick="showPage('notifications')">
+
+🔔 Notifications
+<span>›</span>
+
+</div>
+
+
+<div class="list-item" onclick="showSettings()">
+
+⚙️ Settings
+<span>›</span>
+
+</div>
+
+
+<div class="list-item" onclick="logoutDemo()">
+
+🚪 Logout
+<span>›</span>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- NOTIFICATIONS -->
+
+<section id="notifications" class="page">
+
+<div class="section-title">
+
+<h2>
+🔔 Notifications
+</h2>
+
+</div>
+
+<div id="notificationsList" class="card">
+</div>
+
+</section>
+
+
+<!-- TRANSACTIONS -->
+
+<section id="transactions" class="page">
+
+<div class="section-title">
+
+<h2>
+💰 Transactions
+</h2>
+
+</div>
+
+<div id="transactionsList" class="card">
+</div>
+
+</section>
+
+
+<!-- ORDERS -->
+
+<section id="orders" class="page">
+
+<div class="section-title">
+
+<h2>
+🎁 My Orders
+</h2>
+
+</div>
+
+<div id="ordersList" class="card">
+</div>
+
+</section>
+
+
+<!-- GAME MODAL -->
+
+<div id="gameModal" class="modal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeGame()">
+×
+</button>
+
+<div id="gameContent"></div>
+
+</div>
+
+</div>
+
+
+<!-- REDEEM MODAL -->
+
+<div id="redeemModal" class="modal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeRedeem()">
+×
+</button>
+
+<h2>
+🎁 Redeem UC
+</h2>
+
+<div id="redeemInfo"></div>
+
+<label>
+PUBG Player ID
+</label>
+
+<input id="playerId" class="input" placeholder="Enter Player ID">
+
+<label>
+Player Nickname
+</label>
+
+<input id="nickname" class="input" placeholder="Nickname">
+
+<button class="btn full" onclick="confirmRedeem()">
+CONFIRM REDEMPTION
+</button>
+
+</div>
+
+</div>
+
+
+<!-- NAV -->
+
+<nav class="nav">
+
+<button class="active" onclick="showPage('home',this)">
+🏠
+<span>Home</span>
+</button>
+
+<button onclick="showPage('games',this)">
+🎮
+<span>Games</span>
+</button>
+
+<button onclick="showPage('earn',this)">
+💠
+<span>Earn</span>
+</button>
+
+<button onclick="showPage('rewards',this)">
+🎁
+<span>Rewards</span>
+</button>
+
+<button onclick="showPage('profile',this)">
+👤
+<span>Profile</span>
+</button>
+
+</nav>
+
+</div>
+
+
+<script>
+
+/* =========================
+   CONFIG - ADMIN SETTINGS
+========================= */
+
+const CONFIG = {
+  ADMIN_TELEGRAM_ID: "123456789",
+  BOT_TOKEN: "YOUR_BOT_TOKEN_HERE",
+  API_BASE_URL: "http://localhost:3000",
+  DEMO_MODE: true
+};
+
+const tasksConfig = [
+  { id:1, type:"CHANNEL", title:"Join RBU Official Channel", link:"https://t.me/example", chatId:"@example", reward:350, icon:"📢", enabled:true },
+  { id:2, type:"GROUP", title:"Join RBU Community Group", link:"https://t.me/example", chatId:"-1001234567890", reward:350, icon:"👥", enabled:true },
+  { id:3, type:"CHANNEL", title:"Join Gaming News Channel", link:"https://t.me/example", chatId:"@example", reward:350, icon:"📢", enabled:true },
+  { id:4, type:"GROUP", title:"Join Gaming Community", link:"https://t.me/example", chatId:"-1001234567890", reward:350, icon:"👥", enabled:true },
+  { id:5, type:"CHANNEL", title:"Join Rewards Channel", link:"https://t.me/example", chatId:"@example", reward:350, icon:"📢", enabled:true },
+  { id:6, type:"GROUP", title:"Join RBU Community", link:"https://t.me/example", chatId:"-1001234567890", reward:350, icon:"👥", enabled:true }
+];
+
+const wheelsectors = [
+  { multiplier:0.5, percent:40, label:"0.5x" },
+  { multiplier:1, percent:42, label:"1x" },
+  { multiplier:1.5, percent:11, label:"1.5x" },
+  { multiplier:2, percent:7, label:"2x" }
+];
+
+const diceSides = [
+  { face:1, multiplier:0.35, percent:20 },
+  { face:2, multiplier:0.6, percent:20 },
+  { face:3, multiplier:0.9, percent:30 },
+  { face:4, multiplier:1, percent:14 },
+  { face:5, multiplier:1.5, percent:11 },
+  { face:6, multiplier:2.5, percent:5 }
+];
+
+
+/* =========================
+   DATA
+========================= */
+
+let balance = Number(localStorage.getItem("rbu_balance"));
+if(!Number.isFinite(balance)) balance = 12450;
+
+let earned = Number(localStorage.getItem("rbu_earned"));
+if(!Number.isFinite(earned)) earned = 12450;
+
+let spent = Number(localStorage.getItem("rbu_spent"));
+if(!Number.isFinite(spent)) spent = 0;
+
+let today = Number(localStorage.getItem("rbu_today"));
+if(!Number.isFinite(today)) today = 0;
+
+let dailyDate = localStorage.getItem("rbu_daily") || "";
+
+let gamesPlayed = Number(localStorage.getItem("rbu_games")) || 0;
+
+const rewards = [
+  { uc:60, cost:10000 },
+  { uc:120, cost:20000 },
+  { uc:325, cost:50000 },
+  { uc:660, cost:100000 },
+  { uc:1800, cost:250000 }
+];
+
+let transactions = JSON.parse(localStorage.getItem("rbu_transactions") || "[]");
+let orders = JSON.parse(localStorage.getItem("rbu_orders") || "[]");
+let notifications = JSON.parse(localStorage.getItem("rbu_notifications") || "[]");
+
+
+/* =========================
+   SAVE
+========================= */
+
+function save(){
+  localStorage.setItem("rbu_balance", String(balance));
+  localStorage.setItem("rbu_earned", String(earned));
+  localStorage.setItem("rbu_spent", String(spent));
+  localStorage.setItem("rbu_today", String(today));
+  localStorage.setItem("rbu_games", String(gamesPlayed));
+  localStorage.setItem("rbu_daily", dailyDate);
+  localStorage.setItem("rbu_transactions", JSON.stringify(transactions));
+  localStorage.setItem("rbu_orders", JSON.stringify(orders));
+  localStorage.setItem("rbu_notifications", JSON.stringify(notifications));
+  updateUI();
+}
+
+
+/* =========================
+   UI
+========================= */
+
+function updateUI(){
+  const balanceEl = document.getElementById("balance");
+  if(balanceEl) balanceEl.textContent = balance.toLocaleString() + " RBU";
+
+  const earnedEl = document.getElementById("earned");
+  if(earnedEl) earnedEl.textContent = earned.toLocaleString();
+
+  const spentEl = document.getElementById("spent");
+  if(spentEl) spentEl.textContent = spent.toLocaleString();
+
+  const todayEl = document.getElementById("today");
+  if(todayEl) todayEl.textContent = today.toLocaleString() + " RBU";
+
+  const profileEarned = document.getElementById("profileEarned");
+  if(profileEarned) profileEarned.textContent = earned.toLocaleString();
+
+  const profileSpent = document.getElementById("profileSpent");
+  if(profileSpent) profileSpent.textContent = spent.toLocaleString();
+
+  const gamesEl = document.getElementById("gamesPlayed");
+  if(gamesEl) gamesEl.textContent = String(gamesPlayed);
+
+  updateDailyButton();
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function showPage(id, btn){
+  document.querySelectorAll(".page").forEach(function(page){
+    page.classList.remove("active");
+  });
+
+  const page = document.getElementById(id);
+  if(!page) return;
+  page.classList.add("active");
+
+  if(btn){
+    document.querySelectorAll(".nav button").forEach(function(button){
+      button.classList.remove("active");
+    });
+    btn.classList.add("active");
+  }
+
+  if(id === "rewards") renderRewards();
+  if(id === "notifications") renderNotifications();
+  if(id === "transactions") renderTransactions();
+  if(id === "orders") renderOrders();
+  if(id === "home" || id === "earn") renderTasks();
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+
+/* =========================
+   DAILY BONUS
+========================= */
+
+function updateDailyButton(){
+  const btn = document.getElementById("dailyBtn");
+  if(!btn) return;
+
+  const now = new Date().toDateString();
+  if(dailyDate === now){
+    btn.textContent = "CLAIMED";
+    btn.disabled = true;
+  } else {
+    btn.textContent = "CLAIM";
+    btn.disabled = false;
+  }
+}
+
+
+function claimDaily(){
+  const now = new Date().toDateString();
+  if(dailyDate === now){
+    alert("Daily bonus already claimed today.");
+    return;
+  }
+
+  balance += 100;
+  earned += 100;
+  today += 100;
+  dailyDate = now;
+
+  addTransaction(100, "Daily Bonus", "income");
+  addNotification("🎁 Daily bonus +100 RBU");
+  save();
+
+  alert("+100 RBU added!");
+}
+
+
+/* =========================
+   TASKS
+========================= */
+
+function renderTasks(){
+  const html = tasksConfig.filter(function(task){
+    return task.enabled;
+  }).map(function(task){
+    const completed = localStorage.getItem("rbu_task_" + task.id) === "1";
+    let action = "";
+    if(completed){
+      action = '<div class="completed">✓ DONE</div>';
+    } else {
+      action = '<button class="btn" onclick="openTaskLink(' + task.id + ')">JOIN</button>';
+    }
+    return `
+      <div class="card task">
+        <div class="task-icon">${task.icon}</div>
+        <div class="task-info">
+          <b>${task.title}</b>
+          <small>+${task.reward} RBU</small>
+        </div>
+        ${action}
+      </div>
+    `;
+  }).join("");
+
+  const home = document.getElementById("homeTasks");
+  if(home) home.innerHTML = html;
+
+  const earn = document.getElementById("earnTasks");
+  if(earn) earn.innerHTML = html;
+}
+
+
+function openTaskLink(taskId){
+  const task = tasksConfig.find(function(t){
+    return t.id === taskId;
+  });
+
+  if(!task) return;
+
+  if(CONFIG.DEMO_MODE){
+    setTimeout(function(){
+      verifyTask(taskId);
+    }, 1000);
+  }
+
+  if(task.link){
+    window.open(task.link, "_blank");
+  }
+}
+
+
+function verifyTask(id){
+  const task = tasksConfig.find(function(item){
+    return item.id === id;
+  });
+
+  if(!task) return;
+
+  const key = "rbu_task_" + id;
+  if(localStorage.getItem(key) === "1"){
+    alert("Task already completed.");
+    return;
+  }
+
+  localStorage.setItem(key, "1");
+  balance += task.reward;
+  earned += task.reward;
+  today += task.reward;
+
+  addTransaction(task.reward, task.title, "income");
+  addNotification("📢 +" + task.reward + " RBU earned from task");
+  save();
+
+  renderTasks();
+  alert("Verified! +" + task.reward + " RBU");
+}
+
+
+/* =========================
+   REFERRAL
+========================= */
+
+function copyReferral(){
+  const code = "RBU-7X4K9";
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(code).then(function(){
+      alert("Referral code copied!");
+    }).catch(function(){
+      alert("Code: " + code);
+    });
+  } else {
+    const temp = document.createElement("textarea");
+    temp.value = code;
+    document.body.appendChild(temp);
+    temp.select();
+    document.execCommand("copy");
+    temp.remove();
+    alert("Referral code copied!");
+  }
+}
+
+
+/* =========================
+   GAMES
+========================= */
+
+function openGame(type){
+  const modal = document.getElementById("gameModal");
+  const content = document.getElementById("gameContent");
+
+  if(type === "dice"){
+    content.innerHTML = `
+      <div class="game-panel">
+        <h2>🎲 Dice Game</h2>
+        <p style="color:#8e6cff;margin:10px 0;">Choose your bet amount:</p>
+        <div class="bet-options">
+          <button class="bet-btn" onclick="setBet(100)">100</button>
+          <button class="bet-btn" onclick="setBet(500)">500</button>
+          <button class="bet-btn" onclick="setBet(1000)">1,000</button>
+          <button class="bet-btn" onclick="setBet(5000)">5,000</button>
+          <button class="bet-btn" onclick="setBet(10000)">10,000</button>
+          <button class="bet-btn" onclick="setBet(50000)">50,000</button>
+        </div>
+        <input type="number" id="customBet" class="input" placeholder="Or enter custom amount" min="10">
+        <button class="btn full" onclick="rollDice()" style="margin-top:15px;">ROLL DICE</button>
+      </div>
+    `;
+  } else if(type === "wheel"){
+    content.innerHTML = `
+      <div class="game-panel">
+        <h2>🎡 Lucky Wheel</h2>
+        <p style="color:#8e6cff;margin:10px 0;">Choose your bet amount:</p>
+        <div class="bet-options">
+          <button class="bet-btn" onclick="setWheelBet(100)">100</button>
+          <button class="bet-btn" onclick="setWheelBet(500)">500</button>
+          <button class="bet-btn" onclick="setWheelBet(1000)">1,000</button>
+          <button class="bet-btn" onclick="setWheelBet(5000)">5,000</button>
+          <button class="bet-btn" onclick="setWheelBet(10000)">10,000</button>
+          <button class="bet-btn" onclick="setWheelBet(50000)">50,000</button>
+        </div>
+        <input type="number" id="customWheelBet" class="input" placeholder="Or enter custom amount" min="10">
+        <button class="btn full" onclick="spinWheel()" style="margin-top:15px;">SPIN WHEEL</button>
+      </div>
+    `;
+  } else if(type === "mines"){
+    content.innerHTML = `
+      <div class="game-panel">
+        <h2>💣 Mines Game</h2>
+        <p style="color:#8e6cff;margin:10px 0;">Choose your bet amount:</p>
+        <div class="bet-options">
+          <button class="bet-btn" onclick="setMinesBet(100)">100</button>
+          <button class="bet-btn" onclick="setMinesBet(500)">500</button>
+          <button class="bet-btn" onclick="setMinesBet(1000)">1,000</button>
+          <button class="bet-btn" onclick="setMinesBet(5000)">5,000</button>
+          <button class="bet-btn" onclick="setMinesBet(10000)">10,000</button>
+          <button class="bet-btn" onclick="setMinesBet(50000)">50,000</button>
+        </div>
+        <input type="number" id="customMinesBet" class="input" placeholder="Or enter custom amount" min="10">
+        <button class="btn full" onclick="startMines()" style="margin-top:15px;">START GAME</button>
+      </div>
+    `;
+  }
+
+  modal.classList.add("show");
+}
+
+
+function closeGame(){
+  document.getElementById("gameModal").classList.remove("show");
+}
+
+
+/* =========================
+   WEIGHTED RANDOM
+========================= */
+
+function weightedRandom(options){
+  let random = Math.random() * 100;
+  let cumulative = 0;
+  for(let i = 0; i < options.length; i++){
+    cumulative += options[i].percent;
+    if(random < cumulative) return options[i];
+  }
+  return options[options.length - 1];
+}
+
+
+/* =========================
+   DICE GAME
+========================= */
+
+let currentBet = 0;
+
+function setBet(amount){
+  currentBet = amount;
+  document.querySelectorAll("#gameContent .bet-btn").forEach(function(btn){
+    btn.classList.remove("active");
+  });
+  event.target.classList.add("active");
+}
+
+
+function rollDice(){
+  const customBet = document.getElementById("customBet");
+  if(customBet && customBet.value){
+    currentBet = parseInt(customBet.value);
+  }
+
+  if(currentBet <= 0){
+    alert("Please select or enter a bet amount");
+    return;
+  }
+
+  if(currentBet > balance){
+    alert("Insufficient balance!");
+    return;
+  }
+
+  balance -= currentBet;
+  spent += currentBet;
+
+  const selected = weightedRandom(diceSides);
+  const content = document.getElementById("gameContent");
+
+  content.innerHTML = `
+    <div class="game-panel">
+      <h2>🎲 Rolling...</h2>
+      <div style="text-align:center;font-size:60px;margin:40px 0;animation:spin 1s linear infinite;">🎲</div>
+    </div>
+  `;
+
+  setTimeout(function(){
+    const winAmount = Math.floor(currentBet * selected.multiplier);
+    const win = winAmount - currentBet;
+
+    const content = document.getElementById("gameContent");
+    content.innerHTML = `
+      <div class="game-panel">
+        <h2>🎲 Dice Result</h2>
+        <p style="font-size:50px;text-align:center;margin:20px 0;">${selected.face}</p>
+        <p style="text-align:center;color:#8e6cff;margin:10px 0;">${selected.multiplier}x multiplier</p>
+        <div class="result-text ${win >= 0 ? 'green' : 'red'}">
+          ${win > 0 ? '✓ WIN' : win === 0 ? 'DRAW' : '✗ LOSE'}
+        </div>
+        <p style="text-align:center;color:#8e6cff;margin:15px 0;">
+          ${win > 0 ? '+' : ''}${win} RBU
+        </p>
+        <button class="btn full" onclick="finishDice(${win})">Continue</button>
+      </div>
+    `;
+  }, 1500);
+}
+
+
+function finishDice(win){
+  balance += win;
+  if(win > 0) earned += win;
+  
+  gamesPlayed++;
+  const desc = win > 0 ? "Dice Win" : (win === 0 ? "Dice Draw" : "Dice Loss");
+  addTransaction(Math.abs(win), desc, win > 0 ? "income" : "expense");
+  addNotification((win > 0 ? "✓ Dice Win" : "✗ Dice Loss") + " " + Math.abs(win) + " RBU");
+  save();
+  closeGame();
+}
+
+
+/* =========================
+   LUCKY WHEEL
+========================= */
+
+let wheelBet = 0;
+
+function setWheelBet(amount){
+  wheelBet = amount;
+  document.querySelectorAll("#gameContent .bet-btn").forEach(function(btn){
+    btn.classList.remove("active");
+  });
+  event.target.classList.add("active");
+}
+
+
+function spinWheel(){
+  const customBet = document.getElementById("customWheelBet");
+  if(customBet && customBet.value){
+    wheelBet = parseInt(customBet.value);
+  }
+
+  if(wheelBet <= 0){
+    alert("Please select or enter a bet amount");
+    return;
+  }
+
+  if(wheelBet > balance){
+    alert("Insufficient balance!");
+    return;
+  }
+
+  balance -= wheelBet;
+  spent += wheelBet;
+
+  const selected = weightedRandom(wheelsectors);
+  const content = document.getElementById("gameContent");
+  const rotation = Math.random() * 360;
+
+  content.innerHTML = `
+    <div class="game-panel">
+      <h2>🎡 Lucky Wheel</h2>
+      <div class="wheel-container">
+        <div class="wheel-pointer"></div>
+        <div class="wheel spin" style="transform:rotate(${rotation}deg);">${selected.label}</div>
+      </div>
+      <p style="text-align:center;color:#8e6cff;">Spinning...</p>
+    </div>
+  `;
+
+  setTimeout(function(){
+    finishWheel(selected);
+  }, 3000);
+}
+
+
+function finishWheel(selected){
+  const winAmount = Math.floor(wheelBet * selected.multiplier);
+  const win = winAmount - wheelBet;
+
+  balance += win;
+  if(win > 0) earned += win;
+
+  gamesPlayed++;
+  const desc = win > 0 ? "Wheel Win" : (win === 0 ? "Wheel Draw" : "Wheel Loss");
+  addTransaction(Math.abs(win), desc, win > 0 ? "income" : "expense");
+  addNotification((win > 0 ? "✓ Wheel " + selected.label : "✗ Wheel Loss"));
+  save();
+
+  const content = document.getElementById("gameContent");
+  content.innerHTML = `
+    <div class="game-panel">
+      <h2>🎡 Result</h2>
+      <p style="text-align:center;font-size:32px;font-weight:900;margin:20px 0;">${selected.label}</p>
+      <div class="result-text ${win >= 0 ? 'green' : 'red'}">
+        ${win > 0 ? '✓ WIN' : win === 0 ? 'DRAW' : '✗ LOSE'}
+      </div>
+      <p style="text-align:center;color:#8e6cff;margin:15px 0;">
+        ${win > 0 ? '+' : ''}${win} RBU
+      </p>
+      <button class="btn full" onclick="closeGame()">Close</button>
+    </div>
+  `;
+}
+
+
+/* =========================
+   MINES GAME
+========================= */
+
+let minesBet = 0;
+let minesCashout = 0;
+let minesActive = false;
+let minesData = [];
+
+function setMinesBet(amount){
+  minesBet = amount;
+  document.querySelectorAll("#gameContent .bet-btn").forEach(function(btn){
+    btn.classList.remove("active");
+  });
+  event.target.classList.add("active");
+}
+
+
+function startMines(){
+  const customBet = document.getElementById("customMinesBet");
+  if(customBet && customBet.value){
+    minesBet = parseInt(customBet.value);
+  }
+
+  if(minesBet <= 0){
+    alert("Please select or enter a bet amount");
+    return;
+  }
+
+  if(minesBet > balance){
+    alert("Insufficient balance!");
+    return;
+  }
+
+  balance -= minesBet;
+  spent += minesBet;
+
+  minesActive = true;
+  minesCashout = minesBet;
+  minesData = generateMines();
+
+  const content = document.getElementById("gameContent");
+  let minesHtml = '<div class="game-panel"><h2>💣 Mines</h2>';
+  minesHtml += '<p style="color:#8e6cff;margin:10px 0;">Potential Cashout: <b class="green">' + minesCashout.toLocaleString() + ' RBU</b></p>';
+  minesHtml += '<div class="mines">';
+
+  for(let i = 0; i < 16; i++){
+    minesHtml += '<div class="mine" onclick="revealMine(' + i + ', this)" data-mine="' + i + '">?</div>';
+  }
+
+  minesHtml += '</div>';
+  minesHtml += '<button class="btn full" onclick="cashoutMines()" style="margin-top:15px;">CASH OUT ' + minesCashout.toLocaleString() + ' RBU</button>';
+  minesHtml += '</div>';
+
+  content.innerHTML = minesHtml;
+
+  save();
+}
+
+
+function generateMines(){
+  const mines = [];
+  const bombCount = 4;
+  for(let i = 0; i < 16; i++){
+    mines.push(false);
+  }
+  let added = 0;
+  while(added < bombCount){
+    const idx = Math.floor(Math.random() * 16);
+    if(!mines[idx]){
+      mines[idx] = true;
+      added++;
+    }
+  }
+  return mines;
+}
+
+
+function revealMine(index, el){
+  if(!minesActive) return;
+
+  const isBomb = minesData[index];
+
+  if(isBomb){
+    el.textContent = "💣";
+    el.classList.add("bomb", "revealed");
+    minesActive = false;
+    setTimeout(function(){
+      finishMines(-minesBet);
+    }, 500);
+  } else {
+    el.textContent = "💎";
+    el.classList.add("safe", "revealed");
+    minesCashout = Math.floor(minesCashout * 1.3);
+
+    const btn = document.querySelector('button[onclick="cashoutMines()"]');
+    if(btn){
+      btn.textContent = 'CASH OUT ' + minesCashout.toLocaleString() + ' RBU';
+    }
+  }
+}
+
+
+function cashoutMines(){
+  if(!minesActive) return;
+  const win = minesCashout - minesBet;
+  finishMines(win);
+}
+
+
+function finishMines(win){
+  minesActive = false;
+  balance += win;
+  if(win > 0) earned += win;
+
+  gamesPlayed++;
+  const desc = win > 0 ? "Mines Win" : "Mines Loss";
+  addTransaction(Math.abs(win), desc, win > 0 ? "income" : "expense");
+  addNotification((win > 0 ? "✓ Mines Win" : "✗ Mines Loss") + " " + Math.abs(win) + " RBU");
+  save();
+
+  setTimeout(function(){
+    const content = document.getElementById("gameContent");
+    content.innerHTML = `
+      <div class="game-panel">
+        <h2>💣 Game Over</h2>
+        <div class="result-text ${win > 0 ? 'green' : 'red'}">
+          ${win > 0 ? '✓ WIN' : '✗ LOSE'}
+        </div>
+        <p style="text-align:center;color:#8e6cff;margin:15px 0;">
+          ${win > 0 ? '+' : ''}${Math.abs(win)} RBU
+        </p>
+        <button class="btn full" onclick="closeGame()">Close</button>
+      </div>
+    `;
+  }, 500);
+}
+
+
+/* =========================
+   REWARDS
+========================= */
+
+function renderRewards(){
+  const html = rewards.map(function(r, i){
+    return `
+      <div class="card reward">
+        <div class="uc">${r.uc}</div>
+        <div class="reward-info">
+          <h3>${r.uc} UC</h3>
+          <p>${r.cost.toLocaleString()} RBU</p>
+        </div>
+        <button class="btn" onclick="openRedeem(${i})">BUY</button>
+      </div>
+    `;
+  }).join("");
+
+  const list = document.getElementById("rewardsList");
+  if(list) list.innerHTML = html;
+}
+
+
+function openRedeem(index){
+  const r = rewards[index];
+  const modal = document.getElementById("redeemModal");
+  const info = document.getElementById("redeemInfo");
+
+  info.innerHTML = `
+    <p style="text-align:center;margin:15px 0;">
+      <span class="uc">${r.uc}</span>
+    </p>
+    <p style="text-align:center;color:#8e6cff;">Cost: <b>${r.cost.toLocaleString()} RBU</b></p>
+  `;
+
+  document.getElementById("playerId").value = "";
+  document.getElementById("nickname").value = "";
+
+  modal.dataset.rewardIndex = index;
+  modal.classList.add("show");
+}
+
+
+function closeRedeem(){
+  document.getElementById("redeemModal").classList.remove("show");
+}
+
+
+function confirmRedeem(){
+  const index = parseInt(document.getElementById("redeemModal").dataset.rewardIndex);
+  const r = rewards[index];
+  const playerId = document.getElementById("playerId").value.trim();
+  const nickname = document.getElementById("nickname").value.trim();
+
+  if(!playerId || !nickname){
+    alert("Please fill in all fields");
+    return;
+  }
+
+  if(balance < r.cost){
+    alert("Insufficient balance!");
+    return;
+  }
+
+  balance -= r.cost;
+  spent += r.cost;
+
+  const order = {
+    id: "ORD-" + Date.now(),
+    uc: r.uc,
+    cost: r.cost,
+    playerId: playerId,
+    nickname: nickname,
+    status: "Pending",
+    date: new Date().toLocaleString()
+  };
+
+  orders.push(order);
+
+  addTransaction(r.cost, r.uc + " UC Purchase", "expense");
+  addNotification("🎁 " + r.uc + " UC order created. Status: Pending");
+
+  sendOrderToAdmin(order);
+
+  save();
+  closeRedeem();
+  alert("Order created! Order ID: " + order.id);
+}
+
+
+function sendOrderToAdmin(order){
+  if(CONFIG.DEMO_MODE){
+    console.log("DEMO: Order to admin:", order);
+    return;
+  }
+
+  const payload = {
+    order: order,
+    userId: 123456789,
+    username: "@RBUPlayer"
+  };
+
+  fetch(CONFIG.API_BASE_URL + "/api/orders", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  }).then(function(response){
+    return response.json();
+  }).then(function(data){
+    console.log("Order sent:", data);
+  }).catch(function(error){
+    console.error("Order error:", error);
+  });
+}
+
+
+/* =========================
+   TRANSACTIONS
+========================= */
+
+function addTransaction(amount, title, type){
+  transactions.unshift({
+    amount: amount,
+    title: title,
+    type: type,
+    date: new Date().toLocaleString()
+  });
+
+  if(transactions.length > 100) transactions.pop();
+}
+
+
+function renderTransactions(){
+  if(transactions.length === 0){
+    document.getElementById("transactionsList").innerHTML = '<p class="muted">No transactions yet</p>';
+    return;
+  }
+
+  const html = transactions.map(function(t){
+    const isIncome = t.type === "income";
+    const sign = isIncome ? "+" : "-";
+    const color = isIncome ? "green" : "red";
+    return `
+      <div class="list-item">
+        <div>
+          <b>${t.title}</b>
+          <p class="muted" style="font-size:11px;margin-top:3px;">${t.date}</p>
+        </div>
+        <div class="${color}"><b>${sign}${t.amount.toLocaleString()}</b></div>
+      </div>
+    `;
+  }).join("");
+
+  document.getElementById("transactionsList").innerHTML = html;
+}
+
+
+/* =========================
+   NOTIFICATIONS
+========================= */
+
+function addNotification(message){
+  notifications.unshift({
+    message: message,
+    date: new Date().toLocaleString()
+  });
+
+  if(notifications.length > 50) notifications.pop();
+}
+
+
+function renderNotifications(){
+  if(notifications.length === 0){
+    document.getElementById("notificationsList").innerHTML = '<p class="muted">No notifications yet</p>';
+    return;
+  }
+
+  const html = notifications.map(function(n){
+    return `
+      <div class="list-item">
+        <div>
+          <b>${n.message}</b>
+          <p class="muted" style="font-size:11px;margin-top:3px;">${n.date}</p>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  document.getElementById("notificationsList").innerHTML = html;
+}
+
+
+/* =========================
+   ORDERS
+========================= */
+
+function renderOrders(){
+  if(orders.length === 0){
+    document.getElementById("ordersList").innerHTML = '<p class="muted">No orders yet</p>';
+    return;
+  }
+
+  const html = orders.map(function(o){
+    return `
+      <div class="list-item">
+        <div>
+          <b>${o.uc} UC - ${o.nickname}</b>
+          <p class="muted" style="font-size:11px;margin-top:3px;">${o.date}</p>
+          <p class="muted" style="font-size:10px;margin-top:2px;">ID: ${o.playerId}</p>
+        </div>
+        <span class="order-status">${o.status}</span>
+      </div>
+    `;
+  }).join("");
+
+  document.getElementById("ordersList").innerHTML = html;
+}
+
+
+/* =========================
+   SETTINGS & LOGOUT
+========================= */
+
+function showSettings(){
+  alert("Settings\n\nLanguage: Uzbek\nNotifications: Enabled\nTheme: Dark");
+}
+
+
+function logoutDemo(){
+  if(confirm("Are you sure you want to logout?")){
+    alert("Logged out successfully");
+  }
+}
+
+
+/* =========================
+   INIT
+========================= */
+
+window.addEventListener("load", function(){
+  renderTasks();
+  updateUI();
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+# fly.toml — RBU Gaming bot konfiguratsiyasi
+# Ilova nomini birinchi 'fly launch' bosqichida o'zingiz tanlaysiz,
+# shundan keyin bu qator avtomatik to'ldiriladi/yangilanadi.
+app = "rbu-gaming-bot"
+primary_region = "arn"
+
+[build]
+
+[env]
+  PORT = "8080"
+
+[[mounts]]
+  source = "rbu_data"
+  destination = "/data"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [[http_service.checks]]
+    grace_period = "10s"
+    interval = "30s"
+    method = "GET"
+    timeout = "5s"
+    path = "/api/visit"
